@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레이싱 게임</title>
+    <title>멋진 레이싱 게임</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
     <div id="threejs-background"></div>
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
+    <!-- 설정 모달 -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <!-- Create Room Modal -->
+    <!-- 방 생성 모달 -->
     <div id="createRoomModal" class="modal">
         <div class="modal-content">
             <span class="close-button create-room-close">&times;</span>
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <!-- Find Room Modal -->
+    <!-- 방 찾기 모달 -->
     <div id="findRoomModal" class="modal">
         <div class="modal-content">
             <span class="close-button find-room-close">&times;</span>
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <!-- Password Input Modal -->
+    <!-- 비밀번호 입력 모달 -->
     <div id="passwordInputModal" class="modal">
         <div class="modal-content">
             <span class="close-button password-input-close">&times;</span>
@@ -120,8 +120,6 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
