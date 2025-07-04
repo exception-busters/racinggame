@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이싱 게임</title>
+    <style>
+        body { margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #222; color: white; font-family: sans-serif; }
+        #start-screen {
+            text-align: center;
+            z-index: 20;
+        }
+        #start-button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #start-button:hover {
+            background-color: #0056b3;
+        }
+        #game-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none; /* 초기에는 숨김 */
+        }
+        canvas { display: block; }
+        #game-ui {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.2em;
+            z-index: 10;
+        }
+        #speed-display, #decibel-display {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="start-screen">
+        <h1>레이싱 게임</h1>
+        <p>마이크를 사용하여 속도를 조절합니다.</p>
+        <button id="start-button" onclick="startGame()">게임 시작</button>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="game-ui">
+            <div id="speed-display">속도: 0 km/h</div>
+            <div id="decibel-display">데시벨: 0 dB</div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/game.js"></script>
+</body>
+</html>
