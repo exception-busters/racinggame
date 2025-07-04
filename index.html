@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이싱 게임</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="threejs-background"></div>
+    <div class="main-container">
+        <h1>나의 멋진 레이싱 게임</h1>
+        <div class="button-group">
+            <button class="game-button find-room">방 찾기</button>
+            <button class="game-button create-room">방 생성하기</button>
+            <button class="game-button settings">설정</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>설정</h2>
+            <div class="setting-item">
+                <label for="bgmVolume">배경 음악:</label>
+                <input type="range" id="bgmVolume" min="0" max="100" value="50">
+                <span id="bgmVolumeValue">50</span>
+            </div>
+
+            <div class="setting-item">
+                <label for="sfxVolume">효과음:</label>
+                <input type="range" id="sfxVolume" min="0" max="100" value="70">
+                <span id="sfxVolumeValue">70</span>
+            </div>
+
+            <div class="setting-item">
+                <label for="micInput">마이크 설정:</label>
+                <select id="micInput">
+                    <option value="default">기본 마이크</option>
+                    <option value="mic1">마이크 1</option>
+                    <option value="mic2">마이크 2</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label for="language">언어 설정:</label>
+                <select id="language">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Room Modal -->
+    <div id="createRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button create-room-close">&times;</span>
+            <h2>방 생성</h2>
+
+            <div class="setting-item">
+                <label for="roomTitle">방 제목:</label>
+                <input type="text" id="roomTitle" placeholder="방 제목을 입력하세요">
+            </div>
+
+            <div class="setting-item">
+                <label>모드 선택:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gameMode" value="single" checked> 1인용</label>
+                    <label><input type="radio" name="gameMode" value="multi"> 2인용</label>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <label for="mapSelect">맵 선택:</label>
+                <select id="mapSelect">
+                    <option value="map1">맵 1: 도시</option>
+                    <option value="map2">맵 2: 사막</option>
+                    <option value="map3">맵 3: 설원</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label for="passwordToggle">비밀번호 설정:</label>
+                <input type="checkbox" id="passwordToggle">
+            </div>
+
+            <div class="setting-item password-input-container" id="passwordInputContainer" style="display: none;">
+                <label for="roomPassword">비밀번호:</label>
+                <input type="password" id="roomPassword" placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <button class="game-button" style="width: 100%;">방 생성</button>
+        </div>
+    </div>
+
+    <!-- Find Room Modal -->
+    <div id="findRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button find-room-close">&times;</span>
+            <h2>방 찾기</h2>
+            <div class="room-list-grid" id="roomListGrid">
+                <!-- Room items will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Input Modal -->
+    <div id="passwordInputModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button password-input-close">&times;</span>
+            <h2>비밀번호 입력</h2>
+            <div class="setting-item">
+                <label for="joinPassword">비밀번호:</label>
+                <input type="password" id="joinPassword" placeholder="비밀번호를 입력하세요">
+            </div>
+            <button class="game-button" id="submitPassword" style="width: 100%;">확인</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
