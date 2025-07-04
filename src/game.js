@@ -1,9 +1,12 @@
 import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
+console.log('game.js 스크립트 시작');
+
 let scene, camera, renderer, carModel, mixer;
 let currentSpeed = 0;
 let currentDecibel = 0;
+let isCountingDown = false; // 카운트다운 상태 변수
 const maxSpeed = 100; // 최대 속도 (km/h)
 const maxDecibel = 100; // 최대 데시벨 (dB)
 const minDecibel = 30; // 최소 데시벨 (dB)
@@ -54,7 +57,7 @@ function init() {
         '/racinggame/assets/models/cars/ambulance.fbx',
         function (object) {
             carModel = object;
-            carModel.scale.set(0.05, 0.05, 0.05); // 크기 조절
+            carModel.scale.set(0.01, 0.01, 0.01); // 크기 조절
             carModel.position.set(0, 0, 0); // 초기 위치
             carModel.rotation.y = Math.PI; // 모델 방향 조정
             carModel.traverse(function (child) {
@@ -94,7 +97,7 @@ function init() {
 
 function updateCameraPosition() {
     if (carModel) {
-        const relativeCameraOffset = new THREE.Vector3(0, 10, 15); // 자동차로부터의 상대적 위치 (뒤, 위)
+        const relativeCameraOffset = new THREE.Vector3(0, 40, 60); // 자동차로부터의 상대적 위치 (뒤, 위)
         const cameraOffset = relativeCameraOffset.applyMatrix4(carModel.matrixWorld);
 
         camera.position.copy(cameraOffset);
@@ -108,7 +111,36 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+function startGame() {
+    console.log('startGame 함수 호출됨');
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'block';
+    isCountingDown = true;
+
+    let count = 3;
+    countdownElement.textContent = count;
+
+    const countdownInterval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countdownElement.textContent = count;
+        } else if (count === 0) {
+            countdownElement.textContent = 'GO!';
+        } else {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = 'none';
+            isCountingDown = false;
+            init();
+            initAudio();
+        }
+    }, 1000);
+}
+
 function onKeyDown(event) {
+    if (isCountingDown) return; // 카운트다운 중에는 움직임 비활성화
     switch (event.key) {
         case 'ArrowLeft':
             keys.left = true;
@@ -120,6 +152,7 @@ function onKeyDown(event) {
 }
 
 function onKeyUp(event) {
+    if (isCountingDown) return; // 카운트다운 중에는 움직임 비활성화
     switch (event.key) {
         case 'ArrowLeft':
             keys.left = false;
@@ -136,7 +169,7 @@ function animate() {
     const delta = 0.01; // 애니메이션 업데이트 시간 간격
     if (mixer) mixer.update(delta);
 
-    if (carModel) {
+    if (carModel && !isCountingDown) { // 카운트다운 중에는 움직임 비활성화
         // 방향 조절
         if (keys.left) {
             carModel.rotation.y += 0.05; // 왼쪽으로 회전
@@ -199,4 +232,16 @@ async function initAudio() {
     }
 }
 
-init();
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded 이벤트 발생!');
+    const startButton = document.getElementById('start-button');
+    console.log('start-button 요소:', startButton);
+    if (startButton) {
+        startButton.addEventListener('click', startGame);
+        console.log('start-button에 클릭 이벤트 리스너 등록 완료');
+    } else {
+        console.error('start-button 요소를 찾을 수 없습니다.');
+    }
+});
+
+

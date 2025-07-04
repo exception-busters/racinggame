@@ -47,13 +47,24 @@
         #speed-display, #decibel-display {
             margin-bottom: 5px;
         }
+        #countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10em;
+            color: white;
+            text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            z-index: 100;
+            display: none; /* 초기에는 숨김 */
+        }
     </style>
 </head>
 <body>
     <div id="start-screen">
         <h1>레이싱 게임</h1>
         <p>마이크를 사용하여 속도를 조절합니다.</p>
-        <button id="start-button" onclick="startGame()">게임 시작</button>
+        <button id="start-button">게임 시작</button>
     </div>
 
     <div id="game-container">
@@ -65,5 +76,6 @@
     </div>
 
     <script type="module" src="/src/game.js"></script>
+    <div id="countdown">3</div>
 </body>
 </html>
