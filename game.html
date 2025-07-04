@@ -47,9 +47,20 @@
         #speed-display, #decibel-display {
             margin-bottom: 5px;
         }
+        #countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10em;
+            color: white;
+            text-shadow: 0 0 20px rgba(255,255,255,0.8);
+            z-index: 100;
+            display: none; /* 초기에는 숨김 */
+        }
     </style>
-  <script type="module" crossorigin src="/racinggame/assets/game-BJKbs6FJ.js"></script>
-  <link rel="modulepreload" crossorigin href="/racinggame/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <script type="module" crossorigin src="/racinggame/assets/game-D2gctC0N.js"></script>
+  <link rel="modulepreload" crossorigin href="/racinggame/assets/three.module-m8JVxq2j.js">
 </head>
 <body>
     <div id="start-screen">
@@ -66,5 +77,6 @@
         </div>
     </div>
 
+    <div id="countdown">3</div>
 </body>
 </html>
